@@ -42,17 +42,27 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cbg-RK-881">
+                                <rect key="frame" x="40" y="645" width="342" height="67"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Wp4-z4-MIB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="52" id="5F5-9c-ZOK"/>
                             <constraint firstItem="Wp4-z4-MIB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="79" id="K5H-JR-94W"/>
+                            <constraint firstItem="Cbg-RK-881" firstAttribute="top" secondItem="Wp4-z4-MIB" secondAttribute="bottom" constant="85" id="NZI-r6-T5W"/>
                             <constraint firstItem="DWq-MF-CXN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="146" id="NfX-9X-5JG"/>
                             <constraint firstItem="lGM-zW-EUH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="YNY-it-5fz"/>
+                            <constraint firstItem="Cbg-RK-881" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="cG0-v5-Yje"/>
                             <constraint firstItem="lGM-zW-EUH" firstAttribute="centerX" secondItem="DWq-MF-CXN" secondAttribute="centerX" id="e7h-SL-j9c"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Wp4-z4-MIB" secondAttribute="trailing" constant="32" id="iJt-PD-qHk"/>
                             <constraint firstItem="DWq-MF-CXN" firstAttribute="top" secondItem="lGM-zW-EUH" secondAttribute="bottom" constant="56" id="ksp-pz-stF"/>
+                            <constraint firstItem="Cbg-RK-881" firstAttribute="trailing" secondItem="Wp4-z4-MIB" secondAttribute="trailing" id="lZd-2M-Vwh"/>
+                            <constraint firstItem="DWq-MF-CXN" firstAttribute="top" secondItem="Cbg-RK-881" secondAttribute="bottom" constant="8" id="svj-I5-JQe"/>
                             <constraint firstItem="lGM-zW-EUH" firstAttribute="top" secondItem="Wp4-z4-MIB" secondAttribute="bottom" constant="37" id="tl3-su-S0p"/>
                             <constraint firstItem="lGM-zW-EUH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="36" id="vBs-ar-fr7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DWq-MF-CXN" secondAttribute="bottom" constant="98" id="wq1-po-bev"/>
@@ -61,6 +71,7 @@
                     <connections>
                         <outlet property="imageView" destination="Wp4-z4-MIB" id="pv5-B0-2v7"/>
                         <outlet property="lbExplain" destination="lGM-zW-EUH" id="jC8-0T-5e8"/>
+                        <outlet property="lbSecondexp" destination="Cbg-RK-881" id="cNW-ni-J48"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

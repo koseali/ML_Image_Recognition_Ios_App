@@ -13,7 +13,8 @@ import Vision
 class ViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var lbExplain: UILabel!
-    
+    @IBOutlet weak var lbSecondexp: UILabel!
+    var choosenImage = CIImage()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -31,6 +32,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
         imageView.image = info[.originalImage] as? UIImage
         self.dismiss(animated: true, completion: nil)
         if let ciImage = CIImage(image: imageView.image!){
+            choosenImage = ciImage
             recognizeImage(image: ciImage)
         }
    
@@ -38,38 +40,54 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate,UINaviga
     }
     
     
-    func recognizeImage(image : CIImage)  {
-        // 1 request istek oluştur
-        // reponse oluştur Handler et
-        
-        if let model = try?  VNCoreMLModel(for: MobileNetV2().model){
-            let request = VNCoreMLRequest(model: model) { (VNRequest, error) in
-                if error != nil{
-                   // let alert = UIAlertAction(title: "Error", style: UIAlertAction.Style.default, handler: nil)
+    func recognizeImage(image: CIImage) {
+            
+            // 1) Request
+            // 2) Handler
+            
+            lbExplain.text = "Finding ..."
+            lbSecondexp.text = "Computing.."
+            if let model = try? VNCoreMLModel(for: MobileNetV2().model) {
+                let request = VNCoreMLRequest(model: model) { (vnrequest, error) in
+                    
+                    if let results = vnrequest.results as? [VNClassificationObservation] {
+                        if results.count > 0 {
+                            
+                            let topResult = results.first
+                            let secondResult = results[1]
+                            
+                            DispatchQueue.main.async {
+                                //
+                                let confidenceLevel = (topResult?.confidence ?? 0) * 100
+                                
+                                let conf = round((secondResult.confidence ) * 100)
+                                let rounded = Int (confidenceLevel * 100) / 100
+                                
+                                self.lbExplain.text = "\(rounded)% it's \(topResult!.identifier)"
+                                self.lbSecondexp.text = "\(conf)% it's \(secondResult.identifier)"
+                            }
+                            
+                        }
+                        
+                    }
                     
                 }
-                else{
-                    if let results = VNRequest.results as? [VNClassificationObservation]{
-                        if results.count > 0 {
-                            let topResult = results.first
-                            DispatchQueue.main.async {
-                                let confidenceLevel = topResult?.confidence ?? 0 * 100
-                                self.lbExplain.text = "\(confidenceLevel)% it is  \(topResult!.identifier)"
-                            }
-                        
+                
+                let handler = VNImageRequestHandler(ciImage: image)
+                      DispatchQueue.global(qos: .userInteractive).async {
+                        do {
+                        try handler.perform([request])
+                        } catch {
+                            print("error")
                         }
-                            
-                    }
                 }
-            
+                
+                
             }
             
+          
+            
         }
-        
-       
-    }
-    
-    
     
 }
 
